@@ -18,6 +18,7 @@ class UserInput(object):
         self.args = args
         self.elb_help = 'elb help goes here'
         self.instance_help = 'instance help goes here'
+        self.noop_help = 'noop help goes here'
 
         #run the arg parser methods
         self._setup_args()
@@ -43,7 +44,7 @@ class UserInput(object):
 
         ## other options
         self.parser.add_argument("--debug", action="store_true", dest="debug", default=False)
-        self.parser.add_argument("-n", "--noop", action="store_true", dest="noop")
+        self.parser.add_argument("-n", "--noop", action="store_true", dest="noop", default=False, help=self.noop_help)
 
     def _parse_args(self):
         return self.parser.parse_args(self.args)
