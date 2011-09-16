@@ -3,6 +3,9 @@ import boto, os
 class EnvError(Exception):
     pass
 
+class EC2Error(Exception):
+    pass
+
 class ElbConnection(object):
     def __init__(
         self,
@@ -56,9 +59,27 @@ class ElbConnection(object):
     checks to see if the elb name is valid, then runs the private method 
     to loop the list that is output from boto's describe_instance_health
     '''
-        if does_elb_exist(elb_name):
-            return _elb_instance_loop(elb_name, instance_name)
+        if self.does_elb_exist(elb_name):
+            return self._elb_instance_loop(elb_name, instance_name)
         else:
             return False
 
+    def add_instance_to_elb(self, elb_name, instance_name):
+    '''
+    checks to see if the elb exists, and if the instance is not already a
+    member of the elb. Then registers the instance to the elb, and checks
+    the output from the registry action to make sure it was actually added.
+    '''
+        if not self.does_elb_exist(elb_name):
+            raise EC2Error('ELB does not exist: ' + elb_name)
+        else:
+            if self.is_instance_elb_member(elb_name, instance_name):
+                raise EC2Error('Instance %s is already a member of %s' % (instance_name, elb_name))
+            else:
+                register = self.conn.register_instances(elb_name, instance_name)
+                    for i in register:
+                        if i.instance_id == instance_name:
+                            return True
+                        else:
+                            raise EC2Error('Tried to add the instance to the elb, but could not find the instance in the results set')
 
