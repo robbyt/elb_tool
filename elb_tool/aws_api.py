@@ -77,9 +77,9 @@ class ElbConnection(object):
                 raise EC2Error('Instance %s is already a member of %s' % (instance_name, elb_name))
             else:
                 register = self.conn.register_instances(elb_name, instance_name)
-                    for i in register:
-                        if i.instance_id == instance_name:
-                            return True
-                        else:
-                            raise EC2Error('Tried to add the instance to the elb, but could not find the instance in the results set')
+                for i in register:
+                    if i.instance_id == instance_name:
+                        return True
+                    else:
+                        raise EC2Error('Tried to add the instance to the elb, but could not find the instance in the results set')
 
