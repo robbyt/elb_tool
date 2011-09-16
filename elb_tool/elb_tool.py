@@ -9,7 +9,7 @@ class UserInput(object):
         '''
         sets up the user input system. When setting up this 
         class, pass sys.argv[1:] into the class, otherwise for testing
-        pass in a list of simulated arguments
+        pass in a dict of simulated arguments
         '''
         
         # setup the parser
