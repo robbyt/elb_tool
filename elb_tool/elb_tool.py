@@ -50,7 +50,10 @@ class UserInput(object):
         return self.parser.parse_args(self.args)
     
     def get_args_as_dict(self):
-        return vars(self._parse_args())
+        d = vars(self._parse_args())
+        if self.debug_enabled():
+            print d
+        return d
 
     def debug_enabled(self):
         res = self._parse_args()
@@ -61,6 +64,4 @@ class UserInput(object):
 
 if __name__ == '__main__':
     ui = UserInput(sys.argv[1:])
-    ui.debug_enabled()
-    if ui.debug_enabled():
-        print ui.get_args_as_dict()
+    data = ui.get_args_as_dict()
