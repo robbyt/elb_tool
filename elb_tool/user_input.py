@@ -16,9 +16,12 @@ class UserInput(object):
 
         # prep some variables
         self.args = args
-        self.elb_help = 'elb help goes here'
-        self.instance_help = 'instance help goes here'
-        self.noop_help = 'noop help goes here'
+        self.htext = {
+            'elb':'elb help goes here',
+            'instance':'instance help goes here',
+            'action':'action help goes here',
+            'noop':'noop help goes here'
+        }
 
         #run the arg parser methods
         self._setup_args()
@@ -29,7 +32,7 @@ class UserInput(object):
         self.parser.add_argument(
             "-e", "--elb",
             dest="elb_name",
-            help=self.elb_help,
+            help=self.htext['elb'],
             #choices=
             required=True
         )
@@ -37,14 +40,22 @@ class UserInput(object):
         self.parser.add_argument(
             "-i", "--instance",
             dest="instance_name",
-            help=self.instance_help,
+            help=self.htext['instance'],
             #default=
+            required=True
+        )
+
+        self.parser.add_argument(
+            "-a", "--action",
+            dest="action_name",
+            help=self.htext['action'],
+            choices=['check', 'add', 'remove'],
             required=True
         )
 
         ## other options
         self.parser.add_argument("--debug", action="store_true", dest="debug", default=False)
-        self.parser.add_argument("-n", "--noop", action="store_true", dest="noop", default=False, help=self.noop_help)
+        self.parser.add_argument("-n", "--noop", action="store_true", dest="noop", default=False, help=self.htext['noop'])
 
     def _parse_args(self):
         return self.parser.parse_args(self.args)
