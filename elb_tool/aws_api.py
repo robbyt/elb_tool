@@ -83,3 +83,23 @@ class ElbConnection(object):
                     else:
                         raise EC2Error('Tried to add the instance to the elb, but could not find the instance in the results set')
 
+    def remove_instance_from_elb(self, elb_name, instance_name):
+        '''
+        checks to see if elb exists and if the instance is a member.
+        Then it removes the instance from the elb, and checks the output
+        to make sure the removal completed successfully.
+        '''
+        if not self.does_elb_exist(elb_name):
+            raise EC2Error('ELB does not exist: ' + elb_name)
+        else:
+            if not self.is_instance_elb_member(elb_name, instance_name):
+                raise EC2Error('Instance %s is not a member of %s' % (instance_name, elb_name))
+            else:
+                dereg = self.conn.deregister_instances(elb_name, instance_name)
+                for i in dereg:
+                    if i.instance_id == instance_name:
+                        return True
+                    else:
+                        raise EC2Error('Tried to remove the instance to the elb, but could not find the instance in the results set')
+
+
