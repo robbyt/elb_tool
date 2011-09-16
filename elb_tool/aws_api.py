@@ -13,6 +13,7 @@ class ElbConnection(object):
         aws_secret = os.environ.get('EC2_SECRET_KEY'),
         debug = False
     ):
+        self.debug = debug
         if aws_key and aws_secret:
             self.aws_key = aws_key
             self.aws_secret = aws_secret
@@ -38,6 +39,7 @@ class ElbConnection(object):
         '''
         self.conn = self.connect()
         data = self.conn.get_all_load_balancers(elb_name)
+        if self.debug: print data
         if data:
             return True
         else:
@@ -51,6 +53,7 @@ class ElbConnection(object):
         self.conn = self.connect()
         for i in self.conn.describe_instance_health(elb_name):
             if i.instance_id == instance_name:
+                if self.debug: print i
                 return True
             else:
                 return False
