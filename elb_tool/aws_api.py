@@ -58,5 +58,7 @@ class ElbConnection(object):
     '''
         if does_elb_exist(elb_name):
             return _elb_instance_loop(elb_name, instance_name)
+        else:
+            return False
 
 
