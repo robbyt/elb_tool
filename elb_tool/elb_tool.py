@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys, argparse
+import aws_api
 from user_input import *
-from aws_api import *
 
 class ElbTool(object):
     def __init__(self, **kwargs):
@@ -9,6 +9,40 @@ class ElbTool(object):
         self.elb_name = kwargs['elb_name']
         self.debug = kwargs['debug']
         self.noop = kwargs['noop']
+        self.action = kwargs['action_name']
+        
+        self.ec2 = aws_api.ElbConnection()
+
+        if self.action == 'check':
+            self.check()
+        elif self.action == 'add':
+            self.add()
+        elif self.action == 'remove':
+            self.remove()
+
+    def check(self):
+        if self.ec2.is_instance_elb_member(self.elb_name, self.instance_name):
+            print "Yes, %s is a member of %s" % (self.instance_name, self.elb_name)
+            sys.exit(0)
+        else:
+            print "No, %s is not a member of %s" % (self.instance_name, self.elb_name)
+            sys.exit(1)
+
+    def add(self):
+        try:
+            self.ec2.add_instance_to_elb(self.instance_name, self.elb_name)
+            sys.exit(0)
+        except:
+            print 'something went wrong'
+            sys.exit(1)
+            
+    def remove(self):
+        try:
+            self.ec2.remove_instance_from_elb(self.instance_name, self.elb_name)
+            sys.exit(0)
+        except:
+            print 'something went wrong'
+            sys.exit(1)
 
 if __name__ == '__main__':
     # parse the args
@@ -18,4 +52,4 @@ if __name__ == '__main__':
     data = ui.get_args_as_dict()
 
     # throw that dict at the ElbTool to do stuff with the AWS api
-    action = ElbTool(data)
+    action = ElbTool(**data)
