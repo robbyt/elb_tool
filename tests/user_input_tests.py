@@ -1,5 +1,5 @@
 from nose.tools import *
-from elb_tool.elb_tool import *
+from elb_tool.user_input import *
 
 def debug_test():
     ui = UserInput(['-e', 'elb', '-i', 'inst', '--debug'])
