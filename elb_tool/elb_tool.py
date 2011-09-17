@@ -14,12 +14,15 @@ class ElbTool(object):
         self.ec2 = aws_api.ElbConnection(debug=self.debug)
 
     def check(self):
-        if self.ec2.is_instance_elb_member(self.elb_name, self.instance_name):
-            print "Yes, %s is a member of %s" % (self.instance_name, self.elb_name)
-            sys.exit(0)
+        if not self.noop:
+            if self.ec2.is_instance_elb_member(self.elb_name, self.instance_name):
+                print "Yes, %s is a member of %s" % (self.instance_name, self.elb_name)
+                sys.exit(0)
+            else:
+                print "No, %s is not a member of %s" % (self.instance_name, self.elb_name)
+                sys.exit(1)
         else:
-            print "No, %s is not a member of %s" % (self.instance_name, self.elb_name)
-            sys.exit(1)
+            print 'Check not run, because we are in noop mode'
 
     def add(self):
         try:
