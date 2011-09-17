@@ -11,7 +11,7 @@ class ElbTool(object):
         self.noop = kwargs['noop']
         self.action = kwargs['action_name']
         
-        self.ec2 = aws_api.ElbConnection()
+        self.ec2 = aws_api.ElbConnection(debug=self.debug)
 
         if self.action == 'check':
             self.check()
@@ -29,12 +29,12 @@ class ElbTool(object):
             sys.exit(1)
 
     def add(self):
-        try:
-            self.ec2.add_instance_to_elb(self.instance_name, self.elb_name)
-            sys.exit(0)
-        except:
-            print 'something went wrong'
-            sys.exit(1)
+        #try:
+        self.ec2.add_instance_to_elb(self.instance_name, self.elb_name)
+        sys.exit(0)
+        #except:
+        #    print 'something went wrong'
+        #    sys.exit(1)
             
     def remove(self):
         try:
