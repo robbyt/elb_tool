@@ -13,13 +13,6 @@ class ElbTool(object):
         
         self.ec2 = aws_api.ElbConnection(debug=self.debug)
 
-        if self.action == 'check':
-            self.check()
-        elif self.action == 'add':
-            self.add()
-        elif self.action == 'remove':
-            self.remove()
-
     def check(self):
         if self.ec2.is_instance_elb_member(self.elb_name, self.instance_name):
             print "Yes, %s is a member of %s" % (self.instance_name, self.elb_name)
@@ -48,6 +41,14 @@ class ElbTool(object):
             print e
             sys.exit(1)
 
+    def run(self):
+        if self.action == 'check':
+            self.check()
+        elif self.action == 'add':
+            self.add()
+        elif self.action == 'remove':
+            self.remove()
+
 if __name__ == '__main__':
     # parse the args
     ui = UserInput(sys.argv[1:])
@@ -57,3 +58,4 @@ if __name__ == '__main__':
 
     # throw that dict at the ElbTool to do stuff with the AWS api
     action = ElbTool(**data)
+    action.run()
