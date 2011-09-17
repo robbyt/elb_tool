@@ -39,7 +39,7 @@ class ElbConnection(object):
         '''
         self.conn = self.connect()
         data = self.conn.get_all_load_balancers(elb_name)
-        if self.debug: print data
+        if self.debug: print 'found elb: ' + str(data)
         if data:
             return True
         else:
@@ -51,12 +51,16 @@ class ElbConnection(object):
         the list of members in the elb looking for instance_name
         '''
         self.conn = self.connect()
-        for i in self.conn.describe_instance_health(elb_name):
+        self.instance_list = self.conn.describe_instance_health(elb_name)
+        if self.debug: print 'list of instances in %s: %s' % (elb_name, str(self.instance_list))
+        for i in self.instance_list:
+            if self.debug: print 'checking instance: ' + i.instance_id
             if i.instance_id == instance_name:
-                if self.debug: print i
-                return True
+                if self.debug: print 'found instance in list: ' + i.instance_id
+                self.instance_in_elb = True
             else:
-                return False
+                self.instance_in_elb = False
+        return self.instance_in_elb
 
     def is_instance_elb_member(self, elb_name, instance_name):
         '''
