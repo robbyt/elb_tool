@@ -29,19 +29,23 @@ class ElbTool(object):
             sys.exit(1)
 
     def add(self):
-        #try:
-        self.ec2.add_instance_to_elb(self.instance_name, self.elb_name)
-        sys.exit(0)
-        #except:
-        #    print 'something went wrong'
-        #    sys.exit(1)
+        try:
+            if not self.noop:
+                self.ec2.add_instance_to_elb(self.elb_name, self.instance_name)
+            print 'Added %s to %s' % (self.instance_name, self.elb_name)
+            sys.exit(0)
+        except aws_api.EC2Error, e:
+            print e
+            sys.exit(1)
             
     def remove(self):
         try:
-            self.ec2.remove_instance_from_elb(self.instance_name, self.elb_name)
+            if not self.noop:
+                self.ec2.remove_instance_from_elb(self.elb_name, self.instance_name)
+            print 'Removed %s from %s' % (self.instance_name, self.elb_name)
             sys.exit(0)
-        except:
-            print 'something went wrong'
+        except aws_api.EC2Error, e:
+            print e
             sys.exit(1)
 
 if __name__ == '__main__':
