@@ -48,6 +48,9 @@ class ElbTool(object):
             self.add()
         elif self.action == 'remove':
             self.remove()
+        else:
+            print 'Error: can not find your action in action_name'
+            sys.exit(1)
 
 if __name__ == '__main__':
     # parse the args
