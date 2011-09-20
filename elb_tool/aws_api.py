@@ -1,4 +1,4 @@
-import boto, os
+import boto
 
 class EnvError(Exception):
     pass
@@ -9,8 +9,8 @@ class EC2Error(Exception):
 class ElbConnection(object):
     def __init__(
         self,
-        aws_key = os.environ.get('EC2_ACCESS_KEY'),
-        aws_secret = os.environ.get('EC2_SECRET_KEY'),
+        aws_key,
+        aws_secret,
         debug = False
     ):
         self.debug = debug

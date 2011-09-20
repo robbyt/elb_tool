@@ -10,8 +10,14 @@ class ElbTool(object):
         self.debug = kwargs['debug']
         self.noop = kwargs['noop']
         self.action = kwargs['action_name']
+        self.aws_key = kwargs['aws_key']
+        self.aws_secret = kwargs['aws_secret']
         
-        self.ec2 = aws_api.ElbConnection(debug=self.debug)
+        self.ec2 = aws_api.ElbConnection(
+            debug=self.debug,
+            key=self.aws_key,
+            secret=self.aws_secret
+        )
 
     def check(self):
         if not self.noop:

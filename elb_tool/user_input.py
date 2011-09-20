@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import sys, argparse
+import sys, argparse, os
 
 class UserInput(object):
     usage = "Please read --help"
@@ -52,14 +52,14 @@ class UserInput(object):
             "-k", "--key",
             dest="aws_key",
             help=self.htext['key'],
-            default=None
+            default=os.environ.get('EC2_ACCESS_KEY')
         )
 
         self.parser.add_argument(
             "-s", "--secret",
             dest="aws_secret",
             help=self.htext['secret'],
-            default=None
+            default=os.environ.get('EC2_ACCESS_KEY')
         )
 
         # action
