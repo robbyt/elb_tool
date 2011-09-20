@@ -15,8 +15,8 @@ class ElbTool(object):
         
         self.ec2 = aws_api.ElbConnection(
             debug=self.debug,
-            key=self.aws_key,
-            secret=self.aws_secret
+            aws_key=self.aws_key,
+            aws_secret=self.aws_secret
         )
 
     def check(self):
