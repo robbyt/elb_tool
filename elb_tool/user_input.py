@@ -20,8 +20,8 @@ class UserInput(object):
             'elb':'elb help goes here',
             'instance':'instance help goes here',
             'action':'action help goes here',
-            'noop':'noop help goes here'
-            'key':'key help goes here'
+            'noop':'noop help goes here',
+            'key':'key help goes here',
             'secret':'secret help goes here'
         }
 
