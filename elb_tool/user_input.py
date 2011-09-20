@@ -21,6 +21,8 @@ class UserInput(object):
             'instance':'instance help goes here',
             'action':'action help goes here',
             'noop':'noop help goes here'
+            'key':'key help goes here'
+            'secret':'secret help goes here'
         }
 
         #run the arg parser methods
@@ -37,6 +39,7 @@ class UserInput(object):
             required=True
         )
 
+        # instance name
         self.parser.add_argument(
             "-i", "--instance",
             dest="instance_name",
@@ -45,6 +48,21 @@ class UserInput(object):
             required=True
         )
 
+        self.parser.add_argument(
+            "-k", "--key",
+            dest="aws_key",
+            help=self.htext['key'],
+            default=None
+        )
+
+        self.parser.add_argument(
+            "-s", "--secret",
+            dest="aws_secret",
+            help=self.htext['secret'],
+            default=None
+        )
+
+        # action
         self.parser.add_argument(
             "-a", "--action",
             dest="action_name",
