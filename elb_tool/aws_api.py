@@ -18,7 +18,7 @@ class ElbConnection(object):
             self.aws_key = aws_key
             self.aws_secret = aws_secret
         else:
-            raise EnvError('EC2_ACCESS_KEY and EC2_SECRET_KEY environment variables are not set.')
+            raise EnvError('EC2_ACCESS_KEY and EC2_SECRET_KEY environment variables are not set, or did not pass -k -s options at runtime.')
 
     def connect(self):
         '''
@@ -58,6 +58,7 @@ class ElbConnection(object):
             if i.instance_id == instance_name:
                 if self.debug: print 'found instance in list: ' + i.instance_id
                 self.instance_in_elb = True
+                return self.instance_in_elb
             else:
                 self.instance_in_elb = False
         return self.instance_in_elb
