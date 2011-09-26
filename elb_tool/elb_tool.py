@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import sys, argparse
 import aws_api, aws_actions, user_input
 
 
