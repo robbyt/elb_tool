@@ -80,8 +80,7 @@ class UserInput(object):
     
     def get_args_as_dict(self):
         d = vars(self._parse_args())
-        if self.debug_enabled():
-            print d
+        if self.debug_enabled(): print 'parsed args in dict: ' + str(d)
         return d
 
     def debug_enabled(self):
