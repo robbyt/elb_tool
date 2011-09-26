@@ -59,7 +59,7 @@ class UserInput(object):
             "-s", "--secret",
             dest="aws_secret",
             help=self.htext['secret'],
-            default=os.environ.get('EC2_ACCESS_KEY')
+            default=os.environ.get('EC2_SECRET_KEY')
         )
 
         # action
