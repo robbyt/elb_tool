@@ -57,8 +57,7 @@ class ElbConnection(object):
             if self.debug: print 'checking instance: ' + i.instance_id
             if i.instance_id == instance_name:
                 if self.debug: print 'found instance in list: ' + i.instance_id
-                self.instance_in_elb = True
-                return self.instance_in_elb
+                return True
             else:
                 self.instance_in_elb = False
         return self.instance_in_elb
