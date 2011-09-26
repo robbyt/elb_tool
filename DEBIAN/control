@@ -1,4 +1,4 @@
-Package: elb_tool
+Package: elb-tool
 Version: 1.0
 Architecture: all
 Maintainer: Rob Terhaar <rterhaar@atlanticdynamic.com>
