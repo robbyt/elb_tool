@@ -1,0 +1,13 @@
+Source: elb-tool
+Section: unknown
+Priority: extra
+Maintainer: Rob Terhaar <rterhaar@atlanticdynamic.com>
+Build-Depends: cdbs, debhelper (>= 7)
+Standards-Version: 3.8.3
+Homepage: <insert the upstream URL, if relevant>
+
+Package: elb-tool
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>
