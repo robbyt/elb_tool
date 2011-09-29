@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import aws_api, aws_actions, user_input
+import aws_api, aws_actions, user_input, sys
 
 
 if __name__ == '__main__':
