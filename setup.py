@@ -11,7 +11,7 @@ config = {
     'version': '0.1',
     'install_requires': ['nose','boto','argparse'],
     'packages': ['elb_tool'],
-    'scripts': [],
+    'scripts': ['bin/elb_tool'],
     'name': 'elb_tool'
 }
 
