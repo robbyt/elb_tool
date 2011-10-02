@@ -39,7 +39,7 @@ class AwsActions(object):
             sys.exit(0)
 
         elif not self.is_member:
-            print "No, %s is not a member of %s" % (self.instance_name, self.elb_name)
+            print "No, %s is not a member of %s, or is an invalid instance ID" % (self.instance_name, self.elb_name)
             sys.exit(1)
 
 
