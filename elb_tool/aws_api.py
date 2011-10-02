@@ -58,9 +58,8 @@ class ElbConnection(object):
             if i.instance_id == instance_name:
                 if self.debug: print 'found instance in list: ' + i.instance_id
                 return True
-            else:
-                self.instance_in_elb = False
-        return self.instance_in_elb
+        if self.debug: print 'could not find instance: ' + i.instance_id
+        return False
 
     def is_instance_elb_member(self, elb_name, instance_name):
         '''
