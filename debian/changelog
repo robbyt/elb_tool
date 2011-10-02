@@ -1,3 +1,9 @@
+elb-tool (1.0-1ubuntu2) lucid; urgency=low
+
+  * added argparse package as a dep
+
+ -- Rob Terhaar <rterhaar@atlanticdynamic.com>  Sun, 02 Oct 2011 02:04:10 +0000
+
 elb-tool (1.0-1ubuntu1) lucid; urgency=low
 
   * fixed a bug in removing an instance that has already been removed

@@ -9,6 +9,6 @@ Homepage: https://github.com/robbyt/elb_tool
 
 Package: elb-tool
 Architecture: all
-Depends: ${misc:Depends}, python (>= 2.5), python-central (>= 0.6.11), python-m2crypto (>= 0.19.1), python-boto (>= 1.8d)
+Depends: ${misc:Depends}, python (>= 2.5), python-central (>= 0.6.11), python-m2crypto (>= 0.19.1), python-boto (>= 1.8d), python-argparse
 Description: Manage ELB members in Amazon's EC2 service.
  Simple stuff.
