@@ -1,3 +1,9 @@
+elb-tool (1.0-1ubuntu1) lucid; urgency=low
+
+  * fixed a bug in removing an instance that has already been removed
+
+ -- Rob Terhaar <rterhaar@atlanticdynamic.com>  Sun, 02 Oct 2011 01:20:06 +0000
+
 elb-tool (1.0-1) unstable; urgency=low
 
   * Initial release
