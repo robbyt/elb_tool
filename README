@@ -1,4 +1,5 @@
 Basic python cli script for adding nodes to Amazon ELB.
 
 == .deb file ==
-To build a deb file for this module, run "debuild -us -uc"
+To build a deb file for this module, run "debuild -us -uc", and to update the
+debian changelog run "dch -i".
