@@ -17,12 +17,12 @@ class UserInput(object):
         # prep some variables
         self.args = args
         self.htext = {
-            'elb':'elb help goes here',
-            'instance':'instance help goes here',
-            'action':'action help goes here',
-            'noop':'noop help goes here',
-            'key':'key help goes here',
-            'secret':'secret help goes here'
+            'elb':'The ELB name. You must create this ELB somewhere else.',
+            'instance':'EC2 instance ID',
+            'action':'check/add/remove',
+            'noop':'Will not actually interact with the AWS API, for testing',
+            'key':'Your EC2 Access Key - can also be set via envar EC2_ACCESS_KEY',
+            'secret':'Your EC2 Secret Key - can also be set via envar EC2_SECRET_KEY'
         }
 
         #run the arg parser methods
