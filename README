@@ -1,5 +1,43 @@
 Basic python cli script for adding nodes to Amazon ELB.
 
+== help == 
+
+$ elb_tool -h
+
+usage: elb_tool.py [-h] -e ELB_NAME -i INSTANCE_NAME [-k AWS_KEY]
+                   [-s AWS_SECRET] -a {check,add,remove} [--debug] [-n]
+
+elb_tool
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -e ELB_NAME, --elb ELB_NAME
+                        The ELB name. You must create this ELB somewhere else.
+  -i INSTANCE_NAME, --instance INSTANCE_NAME
+                        The EC2 instance ID that you wish to work with.
+  -k AWS_KEY, --key AWS_KEY
+                        Your EC2 Access Key - This can also be set via
+                        environment varible called: EC2_ACCESS_KEY
+  -s AWS_SECRET, --secret AWS_SECRET
+                        Your EC2 Secret Key - This can also be set via
+                        environment variable called: EC2_SECRET_KEY
+  -a {check,add,remove}, --action {check,add,remove}
+                        Pick a single action. 'check' will search the ELB for
+                        the Instance ID that you specify.
+  --debug
+  -n, --noop            If you set this, we will not actually interact with
+                        the AWS API, mostly useful for testing.
+
+== examples == 
+
+$ export EC2_ACCESS_KEY='asdfasdfasdf'
+$ export EC2_SECRET_KEY='asdfasdfasdf'
+$ elb_tool -e dev -i i-FFF00012 -a check
+
+or 
+
+$ elb_tool -e dev -i i-FFF00012 -a add -k asdfasdf -s asdfasdf
+
 == .deb file ==
 To build a deb file for this module, run "debuild -us -uc", and to update the
 debian changelog run "dch -i".

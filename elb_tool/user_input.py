@@ -18,11 +18,11 @@ class UserInput(object):
         self.args = args
         self.htext = {
             'elb':'The ELB name. You must create this ELB somewhere else.',
-            'instance':'EC2 instance ID',
-            'action':'check/add/remove',
-            'noop':'Will not actually interact with the AWS API, for testing',
-            'key':'Your EC2 Access Key - can also be set via envar EC2_ACCESS_KEY',
-            'secret':'Your EC2 Secret Key - can also be set via envar EC2_SECRET_KEY'
+            'instance':'The EC2 instance ID that you wish to work with.',
+            'action':'Pick a single action. \'check\' will search the ELB for the Instance ID that you specify.',
+            'noop':'If you set this, we will not actually interact with the AWS API, mostly useful for testing.',
+            'key':'Your EC2 Access Key - This can also be set via environment varible called: EC2_ACCESS_KEY',
+            'secret':'Your EC2 Secret Key - This can also be set via environment variable called: EC2_SECRET_KEY'
         }
 
         #run the arg parser methods
