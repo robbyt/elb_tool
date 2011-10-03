@@ -1,3 +1,9 @@
+elb-tool (1.0-1ubuntu3) lucid; urgency=low
+
+  * better help in cli 
+
+ -- Rob Terhaar <rterhaar@atlanticdynamic.com>  Mon, 03 Oct 2011 05:33:43 +0000
+
 elb-tool (1.0-1ubuntu2) lucid; urgency=low
 
   * added argparse package as a dep
