@@ -22,7 +22,8 @@ class UserInput(object):
             'action':'Pick a single action. \'check\' will search the ELB for the Instance ID that you specify.',
             'noop':'If you set this, we will not actually interact with the AWS API, mostly useful for testing.',
             'key':'Your EC2 Access Key - This can also be set via environment varible called: EC2_ACCESS_KEY',
-            'secret':'Your EC2 Secret Key - This can also be set via environment variable called: EC2_SECRET_KEY'
+            'secret':'Your EC2 Secret Key - This can also be set via environment variable called: EC2_SECRET_KEY',
+            'region':'The ec2 region that you want to connect to. Defaults to us-east-1.',
         }
 
         #run the arg parser methods
@@ -60,6 +61,13 @@ class UserInput(object):
             dest="aws_secret",
             help=self.htext['secret'],
             default=os.environ.get('EC2_SECRET_KEY')
+        )
+
+        self.parser.add_argument(
+            "-r", "--region",
+            dest="region",
+            help=self.htext['region'],
+            default=None,
         )
 
         # action

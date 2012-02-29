@@ -1,4 +1,9 @@
 import boto
+import boto.ec2.elb
+from boto.utils import get_instance_metadata
+import timeout
+
+DEFAULT_REGION = 'us-east-1'
 
 class EnvError(Exception):
     pass
@@ -11,20 +16,47 @@ class ElbConnection(object):
         self,
         aws_key,
         aws_secret,
+        region,
         debug = False
     ):
         self.debug = debug
+
+        # lookup region name, this is alittle weird because the 
+        # get_instance_metadata() does not timeout on it's own.
+        try:
+            self.region = self._lookup_region_name(region)
+        except timeout.TimeoutError:
+            # if we timed out on the connection to the api, just default 
+            # to DEFAULT_REGION instead. You must not be running this tool
+            # from an EC2 machine?
+            self.region = DEFAULT_REGION
+
         if aws_key and aws_secret:
             self.aws_key = aws_key
             self.aws_secret = aws_secret
         else:
             raise EnvError('EC2_ACCESS_KEY and EC2_SECRET_KEY environment variables are not set, or did not pass -k -s options at runtime.')
 
+    @timeout.timeout(5)
+    def _lookup_region_name(self, region_input):
+        """Look up the az name from checking the local instance metadata, 
+        """
+        if region_input is None:
+            # we didn't set a region from the user input, so let's look it up
+            az = get_instance_metadata()['placement']['availability-zone']
+            return az[:-1]
+        else:
+            # we set a region from the input, so let's just return that
+            return region_input
+
     def connect(self):
         '''
         just a basic EC2 api connection
         '''
-        return boto.connect_elb(self.aws_key, self.aws_secret)
+#        return boto.connect_elb(self.aws_key, self.aws_secret)
+        return boto.ec2.elb.connect_to_region(region_name=self.region,
+                                              aws_access_key_id=self.aws_key,
+                                              aws_secret_access_key=self.aws_secret)
 
     def get_elb_list(self):
         '''

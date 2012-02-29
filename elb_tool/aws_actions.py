@@ -10,6 +10,7 @@ class AwsActions(object):
         self.action = kwargs['action_name']
         self.aws_key = kwargs['aws_key']
         self.aws_secret = kwargs['aws_secret']
+        self.region = kwargs['region']
     
         self.ec2 = self.connect()
         
@@ -18,7 +19,8 @@ class AwsActions(object):
             return aws_api.ElbConnection(
                 debug=self.debug,
                 aws_key=self.aws_key,
-                aws_secret=self.aws_secret
+                aws_secret=self.aws_secret,
+                region=self.region
             )
         except aws_api.EnvError, e:
         # EnvError will be raised if we cannot find the connection key/secret
