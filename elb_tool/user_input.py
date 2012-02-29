@@ -67,7 +67,7 @@ class UserInput(object):
             "-r", "--region",
             dest="region",
             help=self.htext['region'],
-            default=None,
+            default='us-east-1',
         )
 
         # action
