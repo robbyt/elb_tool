@@ -1,3 +1,9 @@
+elb-tool (1.1-1ubuntu1) lucid; urgency=low
+
+  * adding region support and auto-lookup
+
+ -- Rob Terhaar <rterhaar@atlanticdynamic.com>  Wed, 29 Feb 2012 21:25:26 +0000
+
 elb-tool (1.0-1ubuntu3) lucid; urgency=low
 
   * better help in cli 
