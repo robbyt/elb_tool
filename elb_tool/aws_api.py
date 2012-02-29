@@ -15,12 +15,13 @@ class ElbConnection(object):
         aws_key,
         aws_secret,
         region,
-        debug = False
-    ):
-        self.debug = debug
+        debug = False):
+        """
+        The purpose of this class is to connect to the aws api, and 
+        return a connection object.
+        """
 
-        # lookup region name, this is alittle weird because the 
-        # get_instance_metadata() does not timeout on it's own.
+        self.debug = debug
         self.region = region
 
         if aws_key and aws_secret:
@@ -33,7 +34,6 @@ class ElbConnection(object):
         '''
         just a basic EC2 api connection
         '''
-#        return boto.connect_elb(self.aws_key, self.aws_secret)
         return boto.ec2.elb.connect_to_region(region_name=self.region,
                                               aws_access_key_id=self.aws_key,
                                               aws_secret_access_key=self.aws_secret)
