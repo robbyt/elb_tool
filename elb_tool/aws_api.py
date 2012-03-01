@@ -35,17 +35,15 @@ class ElbConnection(object):
         just a basic EC2 api connection
         '''
         try:
-            # boto < 2.0 lacked this variable
+            # boto < 2.0 lacked this var
             boto_ver = boto.__version__
         except AttributeError:
             # older connection syntax
-            reg = boto.ec2.get_region(self.region,
-                                      aws_access_key_id=self.aws_key,
-                                      aws_secret_access_key=self.aws_secret)
+            endpoint = 'elasticloadbalancing.%s.amazonaws.com' % (self.region)
 
-            return boto.connect_to_elb(region=reg,
-                                       aws_access_key_id=self.aws_key,
-                                       aws_secret_access_key=self.aws_secret)
+            return boto.connect_elb(host=endpoint,
+                                    aws_access_key_id=self.aws_key,
+                                    aws_secret_access_key=self.aws_secret)
             # end older connection syntax
         # newer connection syntax
         return boto.ec2.elb.connect_to_region(region_name=self.region,
